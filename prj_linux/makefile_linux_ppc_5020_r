@@ -1,0 +1,43 @@
+###
+### Copyright (c) 2006 Kedacom
+###
+
+#########################################################################
+###
+###  DESCRIPTION:
+###    Common definitions for all Makefiles in cmu linux project.
+###
+#########################################################################
+
+TOP := ..
+
+COMM_DIR := 
+
+SRC_DIR := $(TOP)/source
+
+## Name and type of the target for this Makefile
+ARC_TARGET      := zkclient
+
+## Define debugging symbols
+DEBUG = 0
+LINUX_COMPILER = _HHPPC_
+
+CFLAGS += -D_LINUX12_ -D_MPC_EMBEDDED_MTADP_
+CFLAGS += -D_UTF8
+CFLAGS += -DUSE_STATIC_LIB 
+
+## Object files that compose the target(s)
+SRCS := $(wildcard $(SRC_DIR)/*.cpp)
+OBJS := $(patsubst %.cpp,%, $(SRCS))
+
+## Libraries to include in shared object file
+LIBS := pthread zookeeper_mt rt
+
+
+
+## Add driver-specific include directory to the search path
+INC_PATH += $(TOP)/include ../../../10-common/include/watchdog ../../../10-common/include/sa ../../../10-common/include/mcu ../../../10-common/include/system ../../../10-common/include/platform ../../../10-common/include/protocol ../../common/include ../../../10-common/include/nms1 ../../../10-common/include/snmp ../../../10-common/include/snmpmanager ../../../10-common/include/t120 ../../../10-common/include/cbb/license ../../../10-common/include/protocol/h323stack ../../../10-common/include/gk ../../../10-common/include/lgs ../../../10-common/include/jansson ../../../10-common/include/operation ../../../10-common/include/mau ../../../10-common/include/libevent2/linux ../../../10-common/include/libevent2 ../../../10-common/include/librabbitmq ../../../10-common/include/librabbitmq ../../../10-common/include/zkclient ../../../10-common/include/upu ../../../10-common/include/pas ../../../10-common/include/connectadp  ../include ../../../../10-common/include/zookeeper ../../../../10-common/include/zkclient
+
+LIB_PATH += ../../../../10-common/lib/release/linux_ppc_qoriq_2637 
+
+include common.mk
